@@ -1,0 +1,22 @@
+{
+  "name": "final-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "async": "^3.1.0",
+    "bcrypt": "^3.0.7",
+    "express": "^4.17.1",
+    "grpc": "^1.24.2",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.11",
+    "nodemailer": "^6.3.1",
+    "sendgrid": "^5.2.3"
+  }
+}
