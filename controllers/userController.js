@@ -39,7 +39,8 @@ exports.login_user = async function(req,res){
     if(!validPassword) return res.status(400).send('Invalid email or password');
     
 const token = user.generateAuthToken();
-res.header('x-auth-token', token).send(_.pick(user, ['_id','username','email']));
+res.send({..._.pick(user, ['_id','username','email']), token});
+console.log("logged in...")
 };
 
 function validateUser(req){
@@ -48,4 +49,12 @@ function validateUser(req){
         password: Joi.string().required()
     };
     return Joi.validate(req, schema);
+}
+
+
+exports.verify_token = (req, res, next) => {
+    res.status(200)
+    .json({
+        user: req.user
+    })
 }

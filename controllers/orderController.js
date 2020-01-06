@@ -40,7 +40,7 @@ exports.cancel_order = async function(req,res){
 //get all the orders only by admin 
 exports.get_orders = async function(req,res){
     try{
-        const orders = await Order.find();
+        const orders = await Order.find({$or:[{"status":"Approved"},{"status":"Created"}]});
         res.send(orders);
     }
     catch(ex){
@@ -58,14 +58,15 @@ exports.approve_order = async function(req,res){
  if(orderToApprove.status == "Approved"){
    res.status(400).send('The order is already approved')
 }else{
+   if(orderToApprove.status == "Created"){
    var ordersInorder= orderToApprove.ordered;
    for(var i= 0;i<ordersInorder.length;i++){
-    if(ordersInorder[i].quantity_ordered<ordersInorder[i].productId.quantity.stokquantity) {
-       res.send('There is no stok left to approve this order')
+    if(ordersInorder[i].quantity_ordered > ordersInorder[i].productId.quantity.stokQuantity) {
+       return res.send('There is no stok left to approve this order')
     } 
        productsToDecrease.push({
-       id: ordersInorder[i].productId._id,
-       quantity: ordersInorder[i].quantity_ordered
+         id: ordersInorder[i].productId._id,
+         quantity: ordersInorder[i].quantity_ordered
       })
   }
 //approve order after checking that there is enough stock for all orders inside the big order...
@@ -82,7 +83,7 @@ exports.approve_order = async function(req,res){
               sendEmail(
                 callback,
                 "fatjona.sheraj975@gmail.com",//email from where email are send
-                [mail],//emails to where email are send
+                [mail,"fatjona.sheraj@hotmail.com"],//emails to where email are send
                 'Order Approved',
                 'Text Content',
                 '<p style="font-size: 32px;">Your order is approved. It will get soon to you!</p>'
@@ -97,5 +98,5 @@ exports.approve_order = async function(req,res){
 //decrement stock quantity after the order is approved
    decrementQuantity(productsToDecrease);
  }
-
+}
 };

@@ -1,0 +1,34 @@
+<html>    
+    <head>
+        <title>Login</title>
+        <style>
+            li {
+                cursor: pointer;
+                font-size: 20px;
+            }
+            #messages {
+                border: 1px solid lightblue;
+                width: 100%;
+                height: 400px;
+                overflow: scroll;
+                position: absolute;
+                bottom: 0;
+            }
+        </style>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" ></script>
+              <script src="login.js"></script>
+    </head>    
+    <body>    
+        <form id="form_Login" method="post">
+            <input id="txt_username" type="text" value="jona" required placeholder="Username">
+            <br><input id="txt_password" type="password" value="1234" required  placeholder="Password">              
+            <br><input type="submit" value="Login">
+            <ul id="online_users_ul"> </ul>
+            <div id="messages">
+
+            </div>
+        </form> 
+
+    </body>    
+</html>

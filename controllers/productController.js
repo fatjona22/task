@@ -11,7 +11,8 @@ exports.createProduct = async function(req, res){
         price: req.body.price,
         currency: req.body.currency,
         quantity: {
-            initialQuantity: req.body.initialQuantity
+            initialQuantity: req.body.initialQuantity,
+            stokQuantity:req.body.initialQuantity
         }
     });
     product = await product.save();
@@ -31,7 +32,7 @@ exports.getProducts = async function(req,res){
 //adding stock in an existing product 
 
 exports.addstock = async function(req,res){
-    const product = await Product.findByIdAndUpdate( {_id:req.params.id}, {$set:{"quantity.stokQuantity": req.body.stok}}, {new:true});
+    const product = await Product.findByIdAndUpdate( {_id:req.params.id}, {$inc:{"quantity.stokQuantity": req.body.stok}}, {new:true});
     if(!product) return res.status(404).send('The product with the given ID was not found.')
     let stock = new Stock({
         product: product._id,
