@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "grpc": "^1.24.2",
     "joi": "^14.3.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.7.11",
     "nodemailer": "^6.3.1",
     "sendgrid": "^5.2.3",
